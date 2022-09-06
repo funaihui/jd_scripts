@@ -1,8 +1,10 @@
 /**
 * @author 爱码者说
-* @title 京东口令解析
+* @title 京东口令解析_修改版
 * @platform qq wx tg pgm web cron
 * @rule [\s\S]*[(|)|#|@|$|%|¥|￥|!|！]([0-9a-zA-Z]{12,14})[(|)|#|@|$|%|¥|￥|!|！][\s\S]*
+* @rule [\s\S]*[(|)|#|@|$|%|¥|￥|!|！]([0-9a-zA-Z]{10})[(|)|#|@|$|%|¥|￥|!|！][\s\S]*
+* @rule jx ?
 * @priority 6666666
 * @cron 0 20 8 8 *
 * @admin false
@@ -28,7 +30,7 @@ var filters = [{
     {
         'reg': RegExp(/https:\/\/lzkjdz-isv.isvjcloud.com\/wxShareActivity\/activity\/6432842/),
         'msg': "【LZ分享有礼变量】",
-        'env': "jd_fxyl_activityId",
+        'env': "jd_wxShareActivity_activityId",
         'type': 'id'
     },
     {
@@ -46,13 +48,13 @@ var filters = [{
     {
         'reg': RegExp(/https:\/\/cjhy-isv.isvjcloud.com\/wxDrawActivity\/activity\/867591/),
         'msg': "【M转盘抽奖变量】",
-        'env': " M_WX_LUCK_DRAW_URL",
+        'env': " LUCK_DRAW_URL",
         'type': 'url'
     },
     {
         'reg': RegExp(/cjwx\/common\/entry.html/),
         'msg': "【M转盘抽奖变量】",
-        'env': " M_WX_LUCK_DRAW_URL",
+        'env': " LUCK_DRAW_URL",
         'type': 'url'
     },
     {
@@ -64,7 +66,7 @@ var filters = [{
     {
         'reg': RegExp(/https:\/\/lzkjdz-isv.isvjcloud.com\/wxShareActivity/),
         'msg': "【Kr分享有礼变量】",
-        'env': " jd_fxyl_activityId",
+        'env': " jd_wxShareActivity_activityId",
         'type': 'id'
     },
     {
@@ -126,6 +128,12 @@ var filters = [{
         'msg': "【店铺抽奖 · 超级无线】",
         'env': " LUCK_DRAW_URL",
         "type": 'url'
+    },
+    {
+        'reg': RegExp(/https:\/\/lzdz-isv.isvjcloud.com\/categoryUnion\/activity/),
+        'msg': "【品类联合】",
+        'env': " opencard_pl",
+        "type": 'id'
     }
 ];
 var headers = {

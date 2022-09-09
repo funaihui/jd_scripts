@@ -80,7 +80,7 @@ function check() {
 		dataType: "json",
 		//这里接口直接返回文本
 	});
-	s.reply(JSON.stringify(body))
+
 	let token = body.data.token;
 	var url = ql_ipport + "/open/envs?searchValue=&t=" + Date.now();
 	var json = request({
@@ -171,8 +171,6 @@ function check() {
 						content: msg,
 					});
 				}
-			}else{
-				s.reply(pin+" 状态正常 😄")
 			}
 		}
 		sleep(5000); // 5秒后检测下一个

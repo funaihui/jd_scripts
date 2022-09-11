@@ -142,7 +142,7 @@ function check() {
 					"您的账号: " +
 					pin +
 					" ，已过期；\n为了不影响你的收益请及时更新。";
-				Debug(user_id);
+
 				console.log(msg);
 
 				sxck = Number(sxck) + Number(base);
@@ -157,7 +157,7 @@ function check() {
 				}
 				//给TG发
 				if (tg_user_id) {
-					push({
+					sillyGirl.push({
 						platform: "tg",
 						userID: tg_user_id,
 						content: msg,
@@ -165,7 +165,7 @@ function check() {
 				}
 				//给WX发
 				if (wx_user_id) {
-					push({
+					sillyGirl.push({
 						platform: "wx",
 						userID: wx_user_id,
 						content: msg,

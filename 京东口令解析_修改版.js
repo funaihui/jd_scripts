@@ -1,5 +1,8 @@
 /**
 * @author 爱码者说
+* @create_at 2022-09-09 10:32:51
+* @description 解析京东口令，自动生成青龙脚本的环境变量。
+* @version v1.0.0
 * @title 京东口令解析_修改版
 * @platform qq wx tg pgm web cron
 * @rule [\s\S]*[(|)|#|@|$|%|¥|￥|!|！]([0-9a-zA-Z]{12,14})[(|)|#|@|$|%|¥|￥|!|！][\s\S]*
@@ -25,12 +28,6 @@ var filters = [{
         'reg': RegExp(/https:\/\/lzkjdz-isv.isvjcloud.com\/wxTeam\/activity/),
         'msg': "【LZ组队瓜分变量】",
         'env': "jd_zdjr_activityId",
-        'type': 'id'
-    },
-    {
-        'reg': RegExp(/https:\/\/lzkjdz-isv.isvjcloud.com\/wxShareActivity\/activity\/6432842/),
-        'msg': "【LZ分享有礼变量】",
-        'env': "jd_wxShareActivity_activityId",
         'type': 'id'
     },
     {
@@ -108,7 +105,7 @@ var filters = [{
     {
         'reg': RegExp(/https:\/\/prodev.m.jd.com\/mall\/active\/dVF7gQUVKyUcuSsVhuya5d2XD4F/),
         'msg': "【邀请好友赢大礼变量】",
-        'env': " yhyauthorCode",
+        'env': " jd_inv_authorCode",
         'type': 'code'
     },
     {
@@ -132,8 +129,14 @@ var filters = [{
     {
         'reg': RegExp(/https:\/\/lzdz-isv.isvjcloud.com\/categoryUnion\/activity/),
         'msg': "【品类联合】",
-        'env': " opencard_pl",
+        'env': " jd_categoryUnion_activityId",
         "type": 'id'
+    },
+    {
+        'reg': RegExp(/https:\/\/lzdz1-isv.isvjcloud.com\/dingzhi\/joinCommon/),
+        'msg': "通用开卡-joinCommon系列",
+        'env': " jd_joinCommonId",
+        "type": 'id&shopId'
     }
 ];
 var headers = {
@@ -192,6 +195,8 @@ function main() {
     s.reply("正在解析请稍候……");
     var activateId = urlStr.replace(/.*\?activityId\=([^\&]*)\&?.*/g, "$1")
     var code = urlStr.replace(/.*\?code\=([^\&]*)\&?.*/g, "$1");
+    var shopId = urlStr.replace(/.*\&shopid\=([^\&]*)/g, "$1");
+    
     var conmand =false;
     for (var i = 0; i < filters.length; i++) {
         let filter = filters[i];
@@ -207,6 +212,9 @@ function main() {
                 case 'code':
                     filter.env = 'export '+filter.env+'="' + code+'"';
                     break;
+                case 'id&shopId':
+                    filter.env = 'export '+filter.env+'="' + activateId+"&"+shopId+'"';
+                break
             }
             var content = "【发  起  人】：" + body.data.userName + "\n \n【活动名称】：" + body.data.title + "\n \n【活动地址】："+body.data.jumpUrl + "\n \n 洞察变量-" + filter.msg + "\n " + filter.env
             s.reply(content)
@@ -216,5 +224,6 @@ function main() {
     if (!conmand) {
         s.reply("【发  起  人】：" + body.data.userName + "\n \n【活动名称】：" + body.data.title + "\n \n【活动地址】："+body.data.jumpUrl+"\n \n洞察变量-无")
     }
+
 }
 main()

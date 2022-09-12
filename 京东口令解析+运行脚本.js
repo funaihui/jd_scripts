@@ -1,7 +1,7 @@
 /**
 * @author 爱码者说
 * @create_at 2022-09-09 10:32:51
-* @description 防止失恋，关注（https://t.me/iCoderSay），解析京东口令并根据ql spy配置的内容，自动运行相应的jd脚本。
+* @description 防止失联，关注（https://t.me/iCoderSay），解析京东口令并根据ql spy配置的内容，自动运行相应的jd脚本。
 * @version v1.0.0
 * @title 京东口令解析+运行脚本
 * @platform qq wx tg pgm web cron

@@ -1,7 +1,7 @@
 /**
 * @author 爱码者说
 * @create_at 2022-09-09 10:32:51
-* @description 防止失联，关注（https://t.me/iCoderSay），解析京东口令并根据ql spy配置的内容，自动运行相应的jd脚本。
+* @description 防止失恋，关注（https://t.me/iCoderSay），解析京东口令并根据ql spy配置的内容，自动运行相应的jd脚本。
 * @version v1.0.0
 * @title 京东口令解析+运行脚本
 * @platform qq wx tg pgm web cron
@@ -19,7 +19,7 @@ const jd_command = new Bucket("jd_command")
 const qinglong = new Bucket("qinglong");
 const jd_cookie = new Bucket("jd_cookie");
 
-var api = jd_command.get("api", "") // 对机器人发送指令 set jd_command api http://ip:port/jd/jKeyCommand
+var api = jd_command.get("api", "") // 对机器人发送指令 set jd_command api http://ip:port/jd/jKeyCommand?key=
 var filters = [{
     'reg': RegExp(/https:\/\/cjhydz-isv.isvjcloud.com\/wxTeam\/activity/),
     'msg': "CJ组队瓜分变量】",
@@ -243,9 +243,9 @@ function getQltoken() {
     var ql_data = JSON.parse(ql_json);
     var ql_total = ql_data.length;
     if (!ql_total) {
-		s.reply("你没有配置青龙，请先发【青龙管理】配置后再来。");
-		return;
-	}
+        s.reply("你没有配置青龙，请先发【青龙管理】配置后再来。");
+        return;
+    }
     
     //青龙参数
     let ql_ipport = ql_data[0].host;
@@ -339,7 +339,7 @@ function runScript(before_env) {
             break
         }
     }
-    if (ids.length == 0) s.reply(`未发现${env_script},请查看`)
+    if (ids.length == 0) s.reply(`未发现${env_script}脚本,请查验`)
 
     var {body} = request({
         url: url,
@@ -353,7 +353,7 @@ function runScript(before_env) {
     console.log(body)
     if (JSON.parse(body).code == 200) {
 
-        s.reply(`${choose_script.name}已自动运行`)
+        s.reply(`${choose_script.name}🐉已自动运行`)
     }
 }
 

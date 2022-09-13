@@ -58,8 +58,8 @@ var filters = [{
 },
 {
     'reg': RegExp(/https:\/\/lzkj-isv.isvjcloud.com\/wxgame\/activity/),
-    'msg': "【通用游戏变量】",
-    'env': "WXGAME_ACT_ID",
+    'msg': "LZ店铺游戏",
+    'env': "jd_wxgame_activityId",
     'type': 'id'
 },
 {
